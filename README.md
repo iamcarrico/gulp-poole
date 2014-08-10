@@ -4,6 +4,12 @@ Gulp tasks for the [Mr. Poole Jekyll Generator](https://github.com/iamcarrico/ge
 
 ## Usage
 
+Install into your local repository.
+
+```bash
+$ npm install gulp-poole --save-dev
+```
+
 Put in your local gulpfile:
 
 ```js

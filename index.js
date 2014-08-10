@@ -15,6 +15,8 @@ var cp = require('child_process');
 var runSequence = require('run-sequence');
 var changed = require('gulp-changed');
 var deploy = require("gulp-gh-pages");
+var fs = require('fs');
+var defaultSettings = require("./settings.json");
 
 
 
@@ -22,6 +24,15 @@ var deploy = require("gulp-gh-pages");
 // Exports
 //////////////////////////////
 module.exports = function (gulp) {
+  var overrideSettings = require("./poole.json");
+
+  var poole_paths = {
+
+  };
+
+  //////////////////////////////
+  // Sass compile Task
+  //////////////////////////////
   gulp.task('sass', function() {
     browserSync.notify('<span style="color: grey">Running:</span> Sass compiling');
     return gulp.src(paths.sass + '/**/*.scss')
@@ -38,6 +49,9 @@ module.exports = function (gulp) {
       .pipe(browserSync.reload({stream:true}));
   });
 
+  //////////////////////////////
+  // Image Task
+  //////////////////////////////
   gulp.task('images', function() {
     return gulp.src(paths.imagesSrc)
       // Only grab the images that have changed.
@@ -48,7 +62,9 @@ module.exports = function (gulp) {
       .pipe(gulp.dest(paths.img));
   });
 
-  // Watch Files For Changes
+  //////////////////////////////
+  // Watch Task
+  //////////////////////////////
   gulp.task('watch', function() {
     gulp.watch(paths.sass + '/**/*.scss', ['sass']);
     gulp.watch(paths.imagesSrc, function() {
@@ -72,7 +88,9 @@ module.exports = function (gulp) {
     });
   });
 
-  // Our 'build' tasks for jekyll server.
+  //////////////////////////////
+  // Jekyll Tasks
+  //////////////////////////////
   gulp.task('jekyll-build', function (done) {
     return cp.spawn('bundle', ['exec', 'jekyll', 'build'], {stdio: 'inherit'})
       .on('close', done);
@@ -80,7 +98,7 @@ module.exports = function (gulp) {
 
   gulp.task('jekyll', ['jekyll-build']);
 
-  // Our 'dev' tasks for jekyll server, note: it builds the files, but uses extra configuration.
+  // Jekyll Development server.
   gulp.task('jekyll-dev', function (done) {
     browserSync.notify('<span style="color: grey">Running:</span> $ jekyll build');
     return cp.spawn('bundle', ['exec', 'jekyll', 'build', '--config=_config.yml,_config.dev.yml'], {stdio: 'inherit'})
@@ -93,7 +111,9 @@ module.exports = function (gulp) {
     });
   });
 
-  // Development server
+  //////////////////////////////
+  // Server Tasks
+  //////////////////////////////
   gulp.task('server', function(cb) {
     return runSequence(['images', 'sass'],
       'jekyll-dev',
@@ -104,7 +124,9 @@ module.exports = function (gulp) {
 
   gulp.task('serve', ['server']);
 
-  // Build site for production.
+  //////////////////////////////
+  // Build Task
+  //////////////////////////////
   gulp.task('build', function(cb) {
     return runSequence(['sass', 'images'],
       'jekyll-build',
@@ -112,7 +134,9 @@ module.exports = function (gulp) {
     );
   });
 
-  // Deploy code
+  //////////////////////////////
+  // Deploy Task
+  //////////////////////////////
   gulp.task('deploy', function(cb) {
     return runSequence(
       'build',
@@ -121,7 +145,9 @@ module.exports = function (gulp) {
     );
   });
 
-  // Publish code to GitHub Pages branch.
+  //////////////////////////////
+  // Publishing Task
+  //////////////////////////////
   gulp.task('gh-pages', function () {
     gulp.src("./_site/**/*")
       .pipe(deploy({
