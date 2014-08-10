@@ -1,6 +1,6 @@
 {
   "name": "gulp-poole",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Gulp Tasks for Mr. Poole, the Jekyll Generator",
   "main": "index.js",
   "scripts": {
