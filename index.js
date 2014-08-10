@@ -17,6 +17,7 @@ var changed = require('gulp-changed');
 var deploy = require("gulp-gh-pages");
 var fs = require('fs');
 var defaultSettings = require("./settings.json");
+var _ = require('underscore');
 
 
 
@@ -24,11 +25,17 @@ var defaultSettings = require("./settings.json");
 // Exports
 //////////////////////////////
 module.exports = function (gulp) {
-  var overrideSettings = require("./poole.json");
+  var settings = {};
 
-  var poole_paths = {
+  _.extend(settings, defaultSettings, paths);
 
-  };
+  if (fs.existsSync("./poole.json")) {
+    var overrideSettings = require("./poole.json");
+    _.extend(settings, overrideSettings);
+  }
+
+  // TODO: Remove this, but right now, I am lazy.
+  paths = settings;
 
   //////////////////////////////
   // Sass compile Task
