@@ -4,9 +4,9 @@
   "imagesSrc": "_images",
   "assets": "_site/assets",
   "jekyll": [
-    '**/*.html',
-    '**/*.md',
-    '!_site/**/*.html',
-    '!node_modules/**/*'
+    "**/*.html",
+    "**/*.md",
+    "!_site/**/*.html",
+    "!node_modules/**/*"
   ]
 }
