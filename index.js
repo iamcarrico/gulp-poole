@@ -60,7 +60,7 @@ module.exports = function (gulp) {
   // Image Task
   //////////////////////////////
   gulp.task('images', function() {
-    return gulp.src(paths.imagesSrc)
+    return gulp.src(paths.imagesSrc + "/**/*")
       // Only grab the images that have changed.
       .pipe(changed(paths.img))
       // Optimize all the images.
