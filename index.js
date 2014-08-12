@@ -74,7 +74,7 @@ module.exports = function (gulp) {
   //////////////////////////////
   gulp.task('watch', function() {
     gulp.watch(paths.sass + '/**/*.scss', ['sass']);
-    gulp.watch(paths.imagesSrc, function() {
+    gulp.watch(paths.imagesSrc + "/**/*", function() {
       runSequence(['images'], ['jekyll-rebuild'])
     });
     gulp.watch(paths.jekyll, ['jekyll-rebuild']);
@@ -84,13 +84,10 @@ module.exports = function (gulp) {
   //////////////////////////////
   // BrowserSync Task
   //////////////////////////////
-  gulp.task('browserSync', function () {
-    browserSync.init([
-      '_site/' + paths.assets +  '/**/*.css',
-      '_site/**/*.html',
-    ], {
+  gulp.task('browserSync', function() {
+    browserSync({
       server: {
-        baseDir: '_site'
+        baseDir: "_site"
       }
     });
   });
