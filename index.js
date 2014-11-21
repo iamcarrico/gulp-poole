@@ -1,31 +1,25 @@
 'use strict';
 
 //////////////////////////////
-// Node Dependencies
-//////////////////////////////
-var paths = require('compass-options').dirs();
-var compass = require('gulp-compass');
-var minifyCSS = require('gulp-minify-css');
-var prefix = require('gulp-autoprefixer');
-var imagemin = require('gulp-imagemin');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var browserSync = require('browser-sync');
-var cp = require('child_process');
-var runSequence = require('run-sequence');
-var changed = require('gulp-changed');
-var deploy = require("gulp-gh-pages");
-var fs = require('fs');
-var defaultSettings = require("./settings.json");
-var _ = require('underscore');
-
-
-
-//////////////////////////////
 // Exports
 //////////////////////////////
 module.exports = function (gulp) {
   var settings = {};
+
+
+  //////////////////////////////
+  // Node Dependencies
+  //////////////////////////////
+  var $ = require('gulp-load-plugins')();
+  var paths = require('compass-options').dirs();
+  var uglify = require('gulp-uglify');
+  var browserSync = require('browser-sync');
+  var cp = require('child_process');
+  var runSequence = require('run-sequence').use(gulp);
+  var fs = require('fs');
+  var defaultSettings = require("./settings.json");
+  var _ = require('underscore');
+
 
   _.extend(settings, defaultSettings, paths);
 
@@ -43,14 +37,14 @@ module.exports = function (gulp) {
   gulp.task('sass', function() {
     browserSync.notify('<span style="color: grey">Running:</span> Sass compiling');
     return gulp.src(paths.sass + '/**/*.scss')
-      .pipe(compass({
+      .pipe($.compass({
         config_file: './config.rb',
         css: paths.css,
         sass: paths.sass,
         bundle_exec: true,
         time: true
       }))
-      .pipe(prefix("last 2 versions", "> 1%"))
+      .pipe($.autoprefixer("last 2 versions", "> 1%"))
       .pipe(gulp.dest(paths.css))
       .pipe(gulp.dest(paths.assets))
       .pipe(browserSync.reload({stream:true}));
@@ -62,9 +56,9 @@ module.exports = function (gulp) {
   gulp.task('images', function() {
     return gulp.src(paths.imagesSrc + "/**/*")
       // Only grab the images that have changed.
-      .pipe(changed(paths.img))
+      .pipe($.changed(paths.img))
       // Optimize all the images.
-      .pipe(imagemin({optimizationLevel: 5}))
+      .pipe($.imagemin({optimizationLevel: 5}))
       // Put them in the images directory.
       .pipe(gulp.dest(paths.img));
   });
@@ -154,9 +148,7 @@ module.exports = function (gulp) {
   //////////////////////////////
   gulp.task('gh-pages', function () {
     gulp.src("./_site/**/*")
-      .pipe(deploy({
-        cacheDir: '.tmp'
-      })).pipe(gulp.dest('/tmp/gh-pages')); ;
+      .pipe($.ghPages()).pipe(gulp.dest('/tmp/gh-pages')); ;
   });
 
 }
