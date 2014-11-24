@@ -2,7 +2,25 @@
 
 [![NPM version][npm-image]][npm-url] [![License MIT][license-image]][license-url] [![Downloads][downloads-image]][npm-url]
 
-Gulp tasks for the [Mr. Poole Jekyll Generator](https://github.com/iamcarrico/gulp-poole), and can be used on any Jekyll site.
+```
+.___  ___. .______                    _-----_
+|   \/   | |   _  \                   | - - |
+|  \  /  | |  |_)  |                  |  ω  |
+|  |\/|  | |      /                   | ___ |
+|  |  |  | |  |\  \     __          __'.___.'__
+|__|  |__| | _| `._\   (__)        ´    >-<    `
+
+.______     ______     ______    __       _______
+|   _  \   /  __  \   /  __  \  |  |     |   ____|
+|  |_)  | |  |  |  | |  |  |  | |  |     |  |__
+|   ___/  |  |  |  | |  |  |  | |  |     |   __|
+|  |      |  `--'  | |  `--'  | |  `----.|  |____
+| _|       \______/   \______/  |_______||_______|
+```
+
+For the Yeoman generator that set's up a Jekyll site for you, check out [Mr. Poole, the Jekyll Site Generator](https://github.com/iamcarrico/generator-poole/).
+
+Gulp tasks for the [Mr. Poole Jekyll Generator](https://github.com/iamcarrico/generator-poole), and can be used on any Jekyll site.
 
 ## Usage
 
@@ -20,6 +38,10 @@ Put in your local gulpfile:
 var gulp = require('gulp');
 require('gulp-poole')(gulp);
 ```
+
+## Required files
+
+For these tools to work you MUST create a ```_config.dev.yml```. You can use this to override any settings for local development that you do not want for deployment. For example, you can prevent jekyll-assets from uglifying your JavaScript by overriding the setting.
 
 ### Settings
 
