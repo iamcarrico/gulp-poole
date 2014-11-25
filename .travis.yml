@@ -5,4 +5,3 @@ before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'gulp-poole' ]; then cd .. && eval "mv $currentfolder gulp-poole" && cd gulp-poole; fi
   - bundle install
-  - jekyll new test/jekyll

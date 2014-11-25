@@ -1,6 +1,6 @@
 # Gulp Tools for Mr. Poole
 
-[![NPM version][npm-image]][npm-url] [![License MIT][license-image]][license-url] [![Downloads][downloads-image]][npm-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![License MIT][license-image]][license-url] [![Downloads][downloads-image]][npm-url]
 
 ```
 .___  ___. .______                    _-----_
@@ -68,7 +68,7 @@ To build our Jekyll site, and serve it using BrowserSync. This will watch our fi
 $ gulp server
 ```
 
-To build our site for production, and save the result in '_site':
+To build our site for production, and save the result in ```_site```:
 
 ```bash
 $ gulp build
@@ -84,6 +84,10 @@ $ gulp deploy
 ## License
 
 MIT
+
+
+[travis-url]: https://travis-ci.org/iamcarrico/gulp-poole
+[travis-image]: http://img.shields.io/travis/iamcarrico/gulp-poole.svg
 
 [downloads-image]: http://img.shields.io/npm/dm/gulp-poole.svg
 [npm-url]: https://npmjs.org/package/gulp-poole
