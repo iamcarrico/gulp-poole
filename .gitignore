@@ -1,1 +1,5 @@
 node_modules
+Gemfile.lock
+
+# Remove the test files.
+test/jekyll

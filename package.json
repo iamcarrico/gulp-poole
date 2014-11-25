@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "mocha": "*",
+    "rimraf": "*",
     "should": "^4.0.0"
   },
   "peerDependencies": {
