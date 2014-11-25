@@ -46,6 +46,7 @@
     "underscore": "^1.6.0"
   },
   "devDependencies": {
+    "gulp": ">= 3.8.0 < 4",
     "mocha": "*",
     "rimraf": "*",
     "should": "^4.0.0"
