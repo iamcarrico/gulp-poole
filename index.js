@@ -89,18 +89,18 @@ module.exports = function (gulp) {
   //////////////////////////////
   // Jekyll Tasks
   //////////////////////////////
-  gulp.task('jekyll-build', function (done) {
+  gulp.task('jekyll-build', function (cb) {
     return cp.spawn('bundle', ['exec', 'jekyll', 'build'], {stdio: 'inherit'})
-      .on('close', done);
+      .on('close', cb);
   });
 
   gulp.task('jekyll', ['jekyll-build']);
 
   // Jekyll Development server.
-  gulp.task('jekyll-dev', function (done) {
+  gulp.task('jekyll-dev', function (cb) {
     browserSync.notify('<span style="color: grey">Running:</span> $ jekyll build');
     return cp.spawn('bundle', ['exec', 'jekyll', 'build', '--config=_config.yml,_config.dev.yml'], {stdio: 'inherit'})
-      .on('close', done);
+      .on('close', cb);
   });
 
   gulp.task('jekyll-rebuild', function() {
