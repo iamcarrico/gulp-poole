@@ -1,5 +1,0 @@
-# Pull gems from RubyGems
-source 'https://rubygems.org'
-
-gem 'jekyll'
-gem 'compass'

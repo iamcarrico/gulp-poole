@@ -17,7 +17,7 @@ describe('Mr. Poole\'s Gulp Tools', function () {
         // Config.rb for our compass compiling.
         fs.createReadStream('../files/config.rb')
           .pipe(fs.createWriteStream('config.rb'));
-        fs.createReadStream('../files/Gemfile')
+        fs.createReadStream('../../Gemfile')
           .pipe(fs.createWriteStream('Gemfile'));
         fs.createReadStream('../files/_config.dev.yml')
           .pipe(fs.createWriteStream('_config.dev.yml'));
