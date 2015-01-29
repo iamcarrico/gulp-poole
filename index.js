@@ -17,14 +17,14 @@ module.exports = function (gulp) {
       cp = require('child_process'),
       runSequence = require('run-sequence').use(gulp),
       fs = require('fs'),
-      defaultSettings = require("./settings.json"),
+      defaultSettings = require('./settings.json'),
       _ = require('underscore');
 
 
   _.extend(settings, defaultSettings, paths);
 
-  if (fs.existsSync("./poole.json")) {
-    var overrideSettings = require("./poole.json");
+  if (fs.existsSync('./poole.json')) {
+    var overrideSettings = require('./poole.json');
     _.extend(settings, overrideSettings);
   }
 
@@ -44,7 +44,7 @@ module.exports = function (gulp) {
         bundle_exec: true,
         time: true
       }))
-      .pipe($.autoprefixer("last 2 versions", "> 1%"))
+      .pipe($.autoprefixer('last 2 versions', '> 1%'))
       .pipe(gulp.dest(paths.css))
       .pipe(gulp.dest(paths.assets))
       .pipe(browserSync.reload({stream:true}));
@@ -54,7 +54,7 @@ module.exports = function (gulp) {
   // Image Task
   //////////////////////////////
   gulp.task('images', function() {
-    return gulp.src(paths.imagesSrc + "/**/*")
+    return gulp.src(paths.imagesSrc + '/**/*')
       // Only grab the images that have changed.
       .pipe($.changed(paths.img))
       // Optimize all the images.
@@ -68,7 +68,7 @@ module.exports = function (gulp) {
   //////////////////////////////
   gulp.task('watch', function() {
     gulp.watch(paths.sass + '/**/*.scss', ['sass']);
-    gulp.watch(paths.imagesSrc + "/**/*", function() {
+    gulp.watch(paths.imagesSrc + '/**/*', function() {
       runSequence(['images'], ['jekyll-rebuild'])
     });
     gulp.watch(paths.jekyll, ['jekyll-rebuild']);
@@ -81,7 +81,7 @@ module.exports = function (gulp) {
   gulp.task('browserSync', function() {
     browserSync({
       server: {
-        baseDir: "_site"
+        baseDir: '_site'
       }
     });
   });
@@ -147,7 +147,7 @@ module.exports = function (gulp) {
   // Publishing Task
   //////////////////////////////
   gulp.task('gh-pages', function () {
-    gulp.src("./_site/**/*")
+    gulp.src('./_site/**/*')
       .pipe($.ghPages()).pipe(gulp.dest('/tmp/gh-pages')); ;
   });
 
