@@ -10,15 +10,15 @@ module.exports = function (gulp) {
   //////////////////////////////
   // Node Dependencies
   //////////////////////////////
-  var $ = require('gulp-load-plugins')();
-  var paths = require('compass-options').dirs();
-  var uglify = require('gulp-uglify');
-  var browserSync = require('browser-sync');
-  var cp = require('child_process');
-  var runSequence = require('run-sequence').use(gulp);
-  var fs = require('fs');
-  var defaultSettings = require("./settings.json");
-  var _ = require('underscore');
+  var $ = require('gulp-load-plugins')(),
+      paths = require('compass-options').dirs(),
+      uglify = require('gulp-uglify'),
+      browserSync = require('browser-sync'),
+      cp = require('child_process'),
+      runSequence = require('run-sequence').use(gulp),
+      fs = require('fs'),
+      defaultSettings = require("./settings.json"),
+      _ = require('underscore');
 
 
   _.extend(settings, defaultSettings, paths);
