@@ -35,7 +35,7 @@ module.exports = function (gulp) {
   /**
    * Gulp task that compiles sass files.
    */
-  gulp.task('sass', function() {
+  gulp.task('sass', function () {
     browserSync.notify('<span style="color: grey">Running:</span> Sass compiling');
     return gulp.src(paths.sass + '/**/*.scss')
       .pipe($.compass({
@@ -48,13 +48,13 @@ module.exports = function (gulp) {
       .pipe($.autoprefixer('last 2 versions', '> 1%'))
       .pipe(gulp.dest(paths.css))
       .pipe(gulp.dest(paths.assets))
-      .pipe(browserSync.reload({stream:true}));
+      .pipe(browserSync.reload({stream: true}));
   });
 
   /**
    * Gulp task that optimizes images.
    */
-  gulp.task('images', function() {
+  gulp.task('images', function () {
     return gulp.src(paths.imagesSrc + '/**/*')
       // Only grab the images that have changed.
       .pipe($.changed(paths.img))
@@ -72,7 +72,7 @@ module.exports = function (gulp) {
    * @see images gulp task.
    * @see jekyll-rebuild gulp task.
    */
-  gulp.task('watch', function() {
+  gulp.task('watch', function () {
     gulp.watch(paths.sass + '/**/*.scss', ['sass']);
     gulp.watch(paths.imagesSrc + '/**/*', function() {
       runSequence(['images'], ['jekyll-rebuild'])
@@ -83,7 +83,7 @@ module.exports = function (gulp) {
   /**
    * Gulp task that runs browserSync.
    */
-  gulp.task('browserSync', function() {
+  gulp.task('browserSync', function () {
     browserSync({
       server: {
         baseDir: '_site'
@@ -116,7 +116,7 @@ module.exports = function (gulp) {
   /**
    * Gulp task that rebuilds a jekyll server.
    */
-  gulp.task('jekyll-rebuild', function() {
+  gulp.task('jekyll-rebuild', function () {
     return runSequence(['jekyll-dev'], function () {
         browserSync.reload();
     });
@@ -128,7 +128,7 @@ module.exports = function (gulp) {
    * @see images gulp task.
    * @see sass gulp task.
    */
-  gulp.task('server', function(cb) {
+  gulp.task('server', function (cb) {
     return runSequence(['images', 'sass'],
       'jekyll-dev',
       ['browserSync', 'watch'],
@@ -141,7 +141,7 @@ module.exports = function (gulp) {
   /**
    * Gulp task that runs a jekyll build.
    */
-  gulp.task('build', function(cb) {
+  gulp.task('build', function (cb) {
     return runSequence(['sass', 'images'],
       'jekyll-build',
       cb
@@ -154,7 +154,7 @@ module.exports = function (gulp) {
    * @see build gulp task.
    * @see gh-pages gulp task.
    */
-  gulp.task('deploy', function(cb) {
+  gulp.task('deploy', function (cb) {
     return runSequence(
       'build',
       'gh-pages',
@@ -169,5 +169,4 @@ module.exports = function (gulp) {
     gulp.src('./_site/**/*')
       .pipe($.ghPages()).pipe(gulp.dest('/tmp/gh-pages')); ;
   });
-
 }
