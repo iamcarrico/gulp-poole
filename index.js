@@ -105,7 +105,7 @@ module.exports = function (gulp) {
   /**
    * Gulp task that runs bundle exec, and jekyll build.
    */
-  gulp.task('jekyll-build', function (done) {
+  gulp.task('jekyll-build', function (cb) {
     return cp.spawn('bundle', ['exec', 'jekyll', 'build'], {stdio: 'inherit'})
       .on('close', cb);
   });
