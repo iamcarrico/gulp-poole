@@ -64,6 +64,15 @@ module.exports = function (gulp) {
   });
 
   //////////////////////////////
+  // Minify html Task
+  //////////////////////////////
+  gulp.task('htmlmin', function() {
+    return gulp.src('./_site/**/*.html')
+      .pipe($.htmlmin({collapseWhitespace: true}))
+      .pipe(gulp.dest('./_site/'))
+  });
+
+  //////////////////////////////
   // Watch Task
   //////////////////////////////
   gulp.task('watch', function() {
@@ -128,6 +137,7 @@ module.exports = function (gulp) {
   gulp.task('build', function(cb) {
     return runSequence(['sass', 'images'],
       'jekyll-build',
+      'htmlmin',
       cb
     );
   });
