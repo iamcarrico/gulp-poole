@@ -1,6 +1,6 @@
 {
   "name": "gulp-poole",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "Gulp Tasks for Mr. Poole, the Jekyll Generator",
   "main": "index.js",
   "scripts": {
@@ -34,25 +34,24 @@
   "dependencies": {
     "browser-sync": ">1.0.0",
     "compass-options": "^0.1.1",
+    "eyeglass": "^0.6.5",
+    "gulp": ">= 3.8.0 < 4",
     "gulp-autoprefixer": "0.0.8",
     "gulp-changed": "^0.3.0",
-    "gulp-compass": "^1.2.0",
     "gulp-gh-pages": "^0.3.3",
     "gulp-htmlmin": "^1.0.0",
     "gulp-imagemin": "^0.6.1",
     "gulp-load-plugins": "^0.7.1",
     "gulp-rename": "^1.2.0",
+    "gulp-sass": "^2.1.0",
+    "gulp-task-listing": "^1.0.1",
     "gulp-uglify": "^0.3.1",
     "run-sequence": ">1.0.0",
     "underscore": "^1.6.0"
   },
   "devDependencies": {
-    "gulp": ">= 3.8.0 < 4",
     "mocha": "*",
     "rimraf": "*",
     "should": "^4.0.0"
-  },
-  "peerDependencies": {
-    "gulp": ">= 3.8.0 < 4"
   }
 }

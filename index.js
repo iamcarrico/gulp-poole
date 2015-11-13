@@ -10,15 +10,19 @@ module.exports = function (gulp) {
   var settings = {};
 
   // Load required components.
-  var $ = require('gulp-load-plugins')(),
-      paths = require('compass-options').dirs(),
-      uglify = require('gulp-uglify'),
-      browserSync = require('browser-sync'),
-      cp = require('child_process'),
-      runSequence = require('run-sequence').use(gulp),
-      fs = require('fs'),
-      defaultSettings = require('./settings.json'),
-      _ = require('underscore');
+  var $ = require('gulp-load-plugins')();
+  var paths = require('compass-options').dirs();
+  var uglify = require('gulp-uglify');
+  var browserSync = require('browser-sync');
+  var cp = require('child_process');
+  var runSequence = require('run-sequence').use(gulp);
+  var fs = require('fs');
+  var defaultSettings = require('./settings.json');
+  var _ = require('underscore');
+  var Eyeglass = require("eyeglass").Eyeglass;
+  var sassOptions = {
+  };
+  var eyeglass = new Eyeglass(sassOptions);
 
   // Merge settings objects.
   _.extend(settings, defaultSettings, paths);
@@ -38,13 +42,7 @@ module.exports = function (gulp) {
   gulp.task('sass', function () {
     browserSync.notify('<span style="color: grey">Running:</span> Sass compiling');
     return gulp.src(paths.sass + '/**/*.scss')
-      .pipe($.compass({
-        config_file: './config.rb',
-        css: paths.css,
-        sass: paths.sass,
-        bundle_exec: true,
-        time: true
-      }))
+      .pipe($.sass(eyeglass.sassOptions()).on("error", $.sass.logError))
       .pipe($.autoprefixer('last 2 versions', '> 1%'))
       .pipe(gulp.dest(paths.css))
       .pipe(gulp.dest(paths.assets))
