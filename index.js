@@ -33,19 +33,16 @@ module.exports = function (gulp) {
     _.extend(settings, overrideSettings);
   }
 
-  // TODO: Remove this, but right now, I am lazy.
-  paths = settings;
-
   /**
    * Gulp task that compiles sass files.
    */
   gulp.task('sass', function () {
     browserSync.notify('<span style="color: grey">Running:</span> Sass compiling');
-    return gulp.src(paths.sass + '/**/*.scss')
+    return gulp.src(settings.sass + '/**/*.scss')
       .pipe($.sass(eyeglass.sassOptions()).on("error", $.sass.logError))
       .pipe($.autoprefixer('last 2 versions', '> 1%'))
-      .pipe(gulp.dest(paths.css))
-      .pipe(gulp.dest(paths.assets))
+      .pipe(gulp.dest(settings.css))
+      .pipe(gulp.dest(settings.assets))
       .pipe(browserSync.reload({stream: true}));
   });
 
@@ -53,13 +50,13 @@ module.exports = function (gulp) {
    * Gulp task that optimizes images.
    */
   gulp.task('images', function () {
-    return gulp.src(paths.imagesSrc + '/**/*')
+    return gulp.src(settings.imagesSrc + '/**/*')
       // Only grab the images that have changed.
-      .pipe($.changed(paths.img))
+      .pipe($.changed(settings.img))
       // Optimize all the images.
       .pipe($.imagemin({optimizationLevel: 5}))
       // Put them in the images directory.
-      .pipe(gulp.dest(paths.img));
+      .pipe(gulp.dest(settings.img));
   });
 
 
@@ -82,11 +79,11 @@ module.exports = function (gulp) {
    * @see jekyll-rebuild gulp task.
    */
   gulp.task('watch', function () {
-    gulp.watch(paths.sass + '/**/*.scss', ['sass']);
-    gulp.watch(paths.imagesSrc + '/**/*', function() {
+    gulp.watch(settings.sass + '/**/*.scss', ['sass']);
+    gulp.watch(settings.imagesSrc + '/**/*', function() {
       runSequence(['images'], ['jekyll-rebuild'])
     });
-    gulp.watch(paths.jekyll, ['jekyll-rebuild']);
+    gulp.watch(settings.jekyll, ['jekyll-rebuild']);
   });
 
   /**
