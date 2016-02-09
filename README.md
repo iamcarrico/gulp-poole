@@ -45,7 +45,22 @@ For these tools to work you MUST create a ```_config.dev.yml```. You can use thi
 
 ### Settings
 
-Settings can be overriden within a local ```poole.json``` file. More details on the tools available soon.
+Settings can be overridden within a local ```poole.json``` file. Create a file called "poole.json" that has the following settings. These are all the defaults that are possible, change any of them as needed. (e.g. if you want to deploy to a different remote, alter `deploy-remote`.)
+
+```json
+{
+  "deploy-remote": "origin",
+  "deploy-branch": "gh-pages",
+  "imagesSrc": "_images",
+  "assets": "_site/assets",
+  "jekyll": [
+    "**/*.html",
+    "**/*.md",
+    "!_site/**/*.html",
+    "!node_modules/**/*"
+  ]
+}
+```
 
 
 ### Tasks
