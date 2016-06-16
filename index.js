@@ -54,7 +54,9 @@ module.exports = function (gulp) {
       // Only grab the images that have changed.
       .pipe($.changed(settings.img))
       // Optimize all the images.
-      .pipe($.imagemin({optimizationLevel: 5}))
+      .pipe($.imagemin([
+        imagemin.optipng({optimizationLevel: 5})
+      ]))
       // Put them in the images directory.
       .pipe(gulp.dest(settings.img));
   });
